@@ -165,9 +165,5 @@
     </ul>
   </div>
 
-  <div class="section">
-    <h2>License</h2>
-    <p>This project is licensed under the MIT License. See the <code>LICENSE</code> file for details.</p>
-  </div>
 </body>
 </html>
