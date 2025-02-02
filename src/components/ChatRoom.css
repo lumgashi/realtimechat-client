@@ -1,0 +1,215 @@
+/* Chat Room Container */
+.chat-room {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #121212;
+  color: white;
+}
+
+/* Chat Header */
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1E1E1E;
+  padding: 15px;
+  border-bottom: 1px solid #333;
+}
+
+.chat-info {
+  display: flex;
+  align-items: center;
+}
+
+.chat-avatar {
+  width: 40px;
+  height: 40px;
+  background-color: gray;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.chat-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.chat-status {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Icons */
+.chat-icons .icon {
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+  color: #888;
+}
+
+.chat-icons .icon:hover {
+  color: white;
+}
+
+/* Messages Area */
+.chat-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Message Box */
+.message-box {
+  max-width: 60%;
+  padding: 10px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.sent {
+  background-color: #007AFF;
+  color: white;
+  align-self: flex-end;
+}
+
+.received {
+  background-color: #333;
+  color: white;
+  align-self: flex-start;
+}
+
+/* Message Text */
+.message-text {
+  font-size: 14px;
+}
+
+/* Message Time */
+.message-time {
+  font-size: 12px;
+  position: absolute;
+  bottom: -15px;
+  right: 5px;
+  color: #aaa;
+}
+
+/* Chat Input */
+.chat-input {
+  display: flex;
+  align-items: center;
+  background-color: #1E1E1E;
+  padding: 10px;
+  border-top: 1px solid #333;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #2A2A2A;
+  color: white;
+  outline: none;
+}
+
+.icon {
+  font-size: 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  color: #888;
+}
+
+.icon:hover {
+  color: white;
+}
+
+.send-btn {
+  background-color: #007AFF;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.send-btn:hover {
+  background-color: #0056b3;
+}
+
+.typing-indicator {
+  font-size: 14px;
+  color: #aaa;
+  padding: 5px 10px;
+  font-style: italic;
+  margin-left: 10px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.back-button .icon {
+  margin-right: 5px;
+  font-size: 18px;
+}
+
+.back-button:hover {
+  color: #ccc;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.message-box {
+  max-width: 60%;
+  min-width: 60px; /* Ensures small messages still have space */
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin: 5px 0;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.sent {
+  align-self: flex-end;
+  background-color: #333;
+  color: white;
+  border-radius: 10px 10px 0 10px;
+}
+
+.received {
+  align-self: flex-start;
+  background-color: #222;
+  color: white;
+  border-radius: 10px 10px 10px 0;
+}
+
+.message-time {
+  font-size: 10px;
+  color: #aaa;
+  position: absolute;
+  bottom: 3px;
+  right: 8px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.message-text {
+  margin-bottom: 15px; /* Creates space above the timestamp */
+}
