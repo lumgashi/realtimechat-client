@@ -1,70 +1,173 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<body>
+  <h1>Chat Application - Frontend</h1>
+  <p>
+    This is the frontend/client for the real-time chat application. It includes a login page, chat list, and chat groups interface. The frontend communicates with the backend server using Socket.IO and REST APIs.
+  </p>
 
-## Available Scripts
+  <div class="section">
+    <h2>Getting Started</h2>
+    <p>Follow these steps to set up and run the frontend application:</p>
+    <h3>Prerequisites</h3>
+    <ul>
+      <li>Node.js and npm installed on your machine.</li>
+      <li>Backend server running (see the backend README for setup instructions).</li>
+    </ul>
+    <h3>Steps</h3>
+    <ol>
+      <li>
+        <strong>Clone the repository (if not already done):</strong>
+        <pre><code>https://github.com/lumgashi/realtimechat-client.git</code></pre>
+      </li>
+      <li>
+        <strong>Navigate to the frontend directory:</strong>
+        <pre><code>cd realtimechat-client</code></pre>
+      </li>
+      <li>
+        <strong>Create a <code>.env</code> file:</strong>
+        <p>Create a <code>.env</code> file in the root of the frontend directory and add the following:</p>
+        <pre><code>PORT=3001</code></pre>
+      </li>
+      <li>
+        <strong>Install dependencies:</strong>
+        <pre><code>npm install</code></pre>
+      </li>
+      <li>
+        <strong>Start the development server:</strong>
+        <pre><code>npm run start</code></pre>
+      </li>
+      <li>
+        <strong>Access the application:</strong>
+        <p>Open your browser and navigate to <code>http://localhost:3001</code>.</p>
+      </li>
+    </ol>
+  </div>
 
-In the project directory, you can run:
+  <div class="section">
+    <h2>Application Features</h2>
+    <p>The frontend application consists of the following pages:</p>
+    <h3>1. Login Page</h3>
+    <ul>
+      <li>Users can enter a username to join the chat application.</li>
+      <li>Username availability is checked in real-time using Socket.IO.</li>
+    </ul>
+    <h3>2. Chat List Page</h3>
+    <ul>
+      <li>Displays a list of available chat rooms.</li>
+      <li>Users can create new rooms or join existing ones.</li>
+    </ul>
+    <h3>3. Chat Group Page</h3>
+    <ul>
+      <li>Users can send and receive messages in real-time.</li>
+      <li>Displays a list of participants in the room.</li>
+      <li>Shows typing indicators when other users are typing.</li>
+    </ul>
+  </div>
 
-### `npm start`
+  <div class="section">
+    <h2>Environment Variables</h2>
+    <p>The following environment variables are required for the frontend application:</p>
+    <ul>
+      <li>
+        <code>PORT</code>: The port on which the frontend application will run. Default is <code>3001</code>.
+        <pre><code>PORT=3001</code></pre>
+      </li>
+    </ul>
+  </div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  <div class="section">
+    <h2>Socket.IO Events</h2>
+    <p>The frontend communicates with the backend using the following Socket.IO events:</p>
+    <h3>Client-to-Server Events</h3>
+    <ul>
+      <li>
+        <code>checkUsername</code>: Checks if a username is already taken.
+        <pre><code>socket.emit("checkUsername", { username: "exampleUser" });</code></pre>
+      </li>
+      <li>
+        <code>joinRoom</code>: Joins a user to a specific room.
+        <pre><code>socket.emit("joinRoom", { username: "exampleUser", room: "room_123" });</code></pre>
+      </li>
+      <li>
+        <code>sendMessage</code>: Sends a message to the current room.
+        <pre><code>socket.emit("sendMessage", { text: "Hello, world!" });</code></pre>
+      </li>
+      <li>
+        <code>createRoom</code>: Creates a new chat room.
+        <pre><code>socket.emit("createRoom", { username: "exampleUser", roomName: "New Room" });</code></pre>
+      </li>
+      <li>
+        <code>userTyping</code>: Notifies the room that a user is typing.
+        <pre><code>socket.emit("userTyping", { room: "room_123", username: "exampleUser" });</code></pre>
+      </li>
+      <li>
+        <code>userStoppedTyping</code>: Notifies the room that a user has stopped typing.
+        <pre><code>socket.emit("userStoppedTyping", { room: "room_123" });</code></pre>
+      </li>
+    </ul>
+    <h3>Server-to-Client Events</h3>
+    <ul>
+      <li>
+        <code>usernameCheckResult</code>: Returns the result of the username check.
+        <pre><code>socket.on("usernameCheckResult", (data) => {
+  console.log(data.isTaken); // true or false
+});</code></pre>
+      </li>
+      <li>
+        <code>roomDetails</code>: Sends details about the room to the client.
+        <pre><code>socket.on("roomDetails", (data) => {
+  console.log(data.roomName); // Name of the room
+});</code></pre>
+      </li>
+      <li>
+        <code>messageHistory</code>: Sends the last 10 messages in the room.
+        <pre><code>socket.on("messageHistory", (messages) => {
+  console.log(messages); // Array of messages
+});</code></pre>
+      </li>
+      <li>
+        <code>message</code>: Sends a new message to all users in the room.
+        <pre><code>socket.on("message", (message) => {
+  console.log(message); // { username, text, timestamp }
+});</code></pre>
+      </li>
+      <li>
+        <code>newRoom</code>: Notifies clients about a newly created room.
+        <pre><code>socket.on("newRoom", (newRoom) => {
+  console.log(newRoom); // { roomId, roomName, creator }
+});</code></pre>
+      </li>
+      <li>
+        <code>displayTyping</code>: Notifies clients that a user is typing.
+        <pre><code>socket.on("displayTyping", (data) => {
+  console.log(data.username); // Username of the typing user
+});</code></pre>
+      </li>
+      <li>
+        <code>hideTyping</code>: Notifies clients that a user has stopped typing.
+        <pre><code>socket.on("hideTyping", () => {
+  console.log("User stopped typing");
+});</code></pre>
+      </li>
+    </ul>
+  </div>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  <div class="section">
+    <h2>Project Structure</h2>
+    <ul>
+      <li><code>public/</code>: Contains static assets like images and the HTML template.</li>
+      <li><code>src/</code>: Contains the React application code.</li>
+      <li><code>src/components/</code>: Reusable React components.</li>
+      <li><code>src/pages/</code>: Pages for the application (e.g., Login, ChatList, ChatGroup).</li>
+      <li><code>src/utils/</code>: Utility functions and Socket.IO setup.</li>
+      <li><code>.env</code>: Environment variables configuration.</li>
+      <li><code>package.json</code>: Lists project dependencies and scripts.</li>
+    </ul>
+  </div>
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  <div class="section">
+    <h2>License</h2>
+    <p>This project is licensed under the MIT License. See the <code>LICENSE</code> file for details.</p>
+  </div>
+</body>
+</html>
